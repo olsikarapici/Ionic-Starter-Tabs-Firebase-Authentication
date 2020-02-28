@@ -9,4 +9,5 @@ It includes an Interface for User object which is used for storing users data in
 
 # Link with Firebase Project
 
-To link this app with your own Firebase project , replace existing firebase configuration on `environment.ts` to match your firebase project configuration.
+To link this app with your own Firebase project , add your firebase project configuration on `environment.ts` and `environment.prod.ts`.
+For more info check: https://firebase.google.com/docs/web/setup
