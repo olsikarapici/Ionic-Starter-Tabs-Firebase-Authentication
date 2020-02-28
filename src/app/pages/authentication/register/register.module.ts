@@ -1,3 +1,4 @@
+import { MustMatchDirective } from './../../../directives/must-match.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { RegisterPage } from './register.page';
     IonicModule,
     RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage, MustMatchDirective]
 })
-export class RegisterPageModule {}
+export class RegisterPageModule { }

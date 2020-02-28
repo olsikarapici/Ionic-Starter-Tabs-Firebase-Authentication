@@ -1,9 +1,102 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register with email</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row id="logoRow">
+      <ion-col class="ion-align-self-center">
+        App Logo
+      </ion-col>
+    </ion-row>
+    <ion-row id="labelsRow">
+      <!-- <ion-col style="text-align: left;">
+        <ion-button mode="ios" fill="clear" (click)="forgotPassword()">Forgot Password</ion-button>
+      </ion-col> -->
+      <ion-col style="text-align: right;">
+        <ion-button mode="ios" fill="clear" (click)="goToLogin()">Login</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row id="inputsRow">
+      <form name="registerForm" #registerForm="ngForm" (ngSubmit)="register(registerForm.value)"
+        [mustMatch]="['password', 'confirmPassword']" novalidate>
 
+        <ion-item lines="none" class="input_box">
+          <ion-label>
+            <ion-icon name="mail-outline" color="light"></ion-icon>
+          </ion-label>
+          <ion-input color="light" type="text" value="" #email="ngModel" name="email" ngModel placeholder="Email"
+            required email>
+          </ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input_box">
+          <ion-label>
+            <ion-icon name="person-outline" color="light"></ion-icon>
+          </ion-label>
+          <ion-input color="light" type="text" value="" #firstName="ngModel" name="firstName" ngModel
+            placeholder="First Name" required>
+          </ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input_box">
+          <ion-label>
+            <ion-icon name="person-outline" color="light"></ion-icon>
+          </ion-label>
+          <ion-input color="light" type="text" value="" #lastName="ngModel" name="lastName" ngModel
+            placeholder="Last Name" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="input_box">
+          <ion-label>
+            <ion-icon name="lock-closed-outline" color="light"></ion-icon>
+          </ion-label>
+          <ion-input color="light" type="password" name="password" value="" #password="ngModel" ngModel
+            placeholder="Password" required minlength="6"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input_box">
+          <ion-label>
+            <ion-icon name="lock-closed-outline" color="light"></ion-icon>
+          </ion-label>
+          <ion-input color="light" type="password" name="confirmPassword" value="" #confirmPassword="ngModel" ngModel
+            placeholder="Confirm Password" required>
+          </ion-input>
+        </ion-item>
+
+        <div *ngIf="registerForm.touched && registerForm.invalid">
+          <div *ngIf="email.errors" class="errors-row">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+          <div *ngIf="firstName.errors" class="errors-row">
+            <div *ngIf="firstName.errors.required">First name is required</div>
+          </div>
+          <div *ngIf="lastName.errors" class="errors-row">
+            <div *ngIf="lastName.errors.required">Last name is required</div>
+          </div>
+          <div *ngIf="password.errors" class="errors-row">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+          <div *ngIf="confirmPassword.errors" class="errors-row">
+            <div *ngIf="confirmPassword.errors.required">Confirm the password</div>
+            <div *ngIf="confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+
+
+        <div *ngIf="error != ''" class="errors-row">{{error}}</div>
+
+        <ion-col size="12" class="ion-align-self-center">
+          <ion-button color="secondary" expand="full" [disabled]="!registerForm.valid" type="submit">Register
+          </ion-button>
+        </ion-col>
+
+      </form>
+    </ion-row>
+  </ion-grid>
 </ion-content>
