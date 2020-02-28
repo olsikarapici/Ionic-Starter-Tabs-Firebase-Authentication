@@ -25,7 +25,13 @@ export class AuthenticationService {
         if (user && user.emailVerified) {
           this.setUid(user.uid);
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
+        }
+        else if (user && user.isAnonymous) {
+          var anonymousUser: User = {};
+          anonymousUser.uid = user.uid;
+          return of(anonymousUser);
+        }
+        else {
           // Logged out
           return of(null);
         }
@@ -49,7 +55,9 @@ export class AuthenticationService {
       uid: user.uid,
       email: user.email,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
+      photoUrl: user.photoUrl ? user.photoUrl : '',
+      phone: user.phone ? user.phone : ''
     }
 
     return userRef.set(data, { merge: true })
@@ -66,6 +74,10 @@ export class AuthenticationService {
 
   async signIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  async signInAnonymously() {
+    return this.afAuth.auth.signInAnonymously();
   }
 
   setUid(uid: string): void {

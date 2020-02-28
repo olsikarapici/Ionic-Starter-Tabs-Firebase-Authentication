@@ -12,10 +12,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-import { MustMatchDirective } from './directives/must-match.directive';
 
 @NgModule({
-  declarations: [AppComponent, MustMatchDirective],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

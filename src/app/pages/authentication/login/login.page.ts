@@ -3,6 +3,7 @@ import { AuthenticationService } from './../../../services/authentication.servic
 import { User } from './../../../interfaces/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private loadingService: LoadingService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private alert: AlertService
   ) {
     this.error = '';
     this.user = {};
@@ -41,12 +43,19 @@ export class LoginPage implements OnInit {
     this.loadingService.present();
 
     this.auth.signIn(loginFormData.email, loginFormData.password).then((data) => {
-      this.router.navigate(["home"]).then(() => {
-        if (this.loadingService.isLoading)
-          this.loadingService.dismiss();
-      })
       console.log('sign in ok return then promise');
       console.log(data);
+      if (data.user.emailVerified) {
+        this.router.navigate(["home"]).then(() => {
+          if (this.loadingService.isLoading)
+            this.loadingService.dismiss();
+        })
+      }
+      else {
+        if (this.loadingService.isLoading)
+          this.loadingService.dismiss();
+        this.alert.simpleToast('Your account is not verified. Please check your email for verification', 3000, "middle")
+      }
 
     }, (err) => {
 

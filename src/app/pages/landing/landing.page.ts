@@ -22,8 +22,23 @@ export class LandingPage implements OnInit {
   }
 
   continueAsGuest() {
-    // this.toast.customMessage("TODO")
-    this.router.navigate(['/home']);
+    this.loadingService.present();
+    this.auth.signInAnonymously().then((data) => {
+      if (this.loadingService.isLoading) {
+        this.loadingService.dismiss()
+      }
+      console.log('sign in ok anonymously');
+      console.log(data);
+      this.router.navigate(['/home']);
+
+    }, (err) => {
+
+      if (this.loadingService.isLoading) {
+        this.loadingService.dismiss()
+      }
+      console.log(err);
+
+    });
   }
 
   register() {
@@ -48,7 +63,7 @@ export class LandingPage implements OnInit {
       result => {
         if (this.loadingService.isLoading)
           this.loadingService.dismiss();
-        if (result) {
+        if (result && result.email) {
           this.router.navigate(['/home']);
         } else {
           if (this.loadingService.isLoading)
