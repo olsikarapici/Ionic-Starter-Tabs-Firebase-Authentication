@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>landing</ion-title>
-  </ion-toolbar>
+<ion-header no-border>
+  <!-- <ion-toolbar>
+    <ion-title>landingPage</ion-title>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row id="logoRow">
+      <ion-col class="ion-align-self-center">
+        App Logo
+      </ion-col>
+    </ion-row>
+    <ion-row id="facebookRow">
+      <ion-col class="ion-align-self-center">
+        <ion-button expand="full" (click)="facebookLogin()">
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>Login
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row id="loginRegisterRow">
+      <ion-col class="ion-align-self-center">
+        <ion-button color="secondary" expand="full" (click)="login()">Login</ion-button>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-button color="secondary" expand="full" (click)="register()">Register</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row id="legalNoticeRow">
+      <ion-col class="ion-align-self-center">
+        You can inlcude hear links to Privacy policy and terms of service
+      </ion-col>
+    </ion-row>
+    <ion-row id="continueAsGuestRow">
+      <ion-col class="ion-align-self-center">
+        <ion-button color="secondary" fill="clear" (click)="continueAsGuest()">Continue as guest</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

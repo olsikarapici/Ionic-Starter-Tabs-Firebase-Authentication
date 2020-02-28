@@ -1,0 +1,21 @@
+#logoRow {
+  height: 70vh;
+  font-size: 1.5em;
+}
+
+ion-row {
+  // width: 100%;
+  text-align: center;
+}
+
+#facebookRow {
+  ion-button {
+    --background: #294886 !important;
+    --border-color: rgba(39, 68, 126, 0.9) !important;
+    --background-activated: #00a3dc !important;
+  }
+}
+
+#legalNoticeRow {
+  font-size: 0.7em;
+}

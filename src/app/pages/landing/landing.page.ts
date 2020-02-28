@@ -1,4 +1,8 @@
+import { LoadingService } from './../../services/loading.service';
+import { AlertService } from './../../services/alert.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +11,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private alert: AlertService,
+    private loadingService: LoadingService,
+    private auth: AuthenticationService
+  ) { }
 
   ngOnInit() {
   }
+
+  continueAsGuest() {
+    // this.toast.customMessage("TODO")
+    this.router.navigate(['/home']);
+  }
+
+  register() {
+    // this.toast.customMessage("TODO");
+    this.router.navigate(['/register']);
+  }
+
+  login() {
+    // this.toast.customMessage("TODO");
+    this.router.navigate(['/login']);
+  }
+
+  facebookLogin() {
+    console.log('fb login');
+    this.alert.simpleToast("To be implemented");
+    // this.router.navigate(['/home']);
+  }
+
+  ionViewWillEnter() {
+    this.loadingService.present();
+    this.auth.user$.subscribe(
+      result => {
+        if (this.loadingService.isLoading)
+          this.loadingService.dismiss();
+        if (result) {
+          this.router.navigate(['/home']);
+        } else {
+          if (this.loadingService.isLoading)
+            this.loadingService.dismiss();
+        }
+      },
+      error => {
+        console.log("EE:", error);
+      }
+    )
+  }
+
 
 }
